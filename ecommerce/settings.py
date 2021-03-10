@@ -28,12 +28,12 @@ SECRET_KEY = 'fyz4gk#o36wg^k(9zv)--6*%pwa8(8kasy!gkppezg-rb4hb=8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
 
-ALLOWED_HOSTS = ['127.0.0.1']
+#ALLOWED_HOSTS = ['127.0.0.1']
 
 ADMINS = (
     ('MidusaTech', 'scarlettbenz101@gmail.com'),
 )
-ALLOWED_HOSTS = ['https://leisurefootwear.herokuapp.com/', '127.0.0.1', '0.0.0.0:5000/']
+ALLOWED_HOSTS = ['https://leisurefootwear.herokuapp.com/', '127.0.0.1', '0.0.0.0/']
 
 DATABASES = {
     'default': {
