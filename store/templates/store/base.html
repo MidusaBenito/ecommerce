@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  {% block title %}<title>Leisure Footwear</title>{% endblock %}
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://kit.fontawesome.com/8b15cbbead.js" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+	
+	</script>
+</head>
+<body>
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-md navbar-dark bg-black">
+    <div class="container">
+      <a href="{% url "store" %}" class="navbar-brand"><img src="{% static "img/logo.png" %}" class="site_logo" alt=""></a>
+      <div class="site_mob ml-auto">
+        <ul class="navbar-nav">
+          {% if user.is_authenticated %}
+            <li class="nav-item dropdown"><a href="#" class="nav-link btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi, {{user.customer.first_name|upper|make_list|first}}{{user.customer.last_name|upper|make_list|first}}</a>
+            
+            <div style="position:absolute;" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
+              <div class="dropdown-divider"></div>
+              <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+            </div>
+            </li>
+           {% else %}
+            <li class="nav-item dropdown"><a href="#" class="nav-link btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user">Login</i></a>
+              <div style="position:absolute;" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a href="{% url 'login' %}" class="dropdown-item">Login</a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'register' %}" class="dropdown-item">Register</a>
+              </div>
+            </li>
+            {% endif %}
+          <li style="padding-top:2.1px;" class="nav-item"><a href="{% url 'cart' %}" class="nav-link"><i class="fas fa-shopping-cart">Cart<span class="badge badge-pill badge-success">{{cartItems}}</span></i></a></li>
+        </ul>
+      </div>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon">   
+          <i class="fas fa-bars" style="color:rgb(0, 0, 0); font-size:28px;"></i>
+      </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+            <li><a href="{% url 'store' %}" class="nav-link">HOME</a></li>
+            {% for c in categories %}
+            <li {% if category.slug == c.slug %} class="#nav-item selected" {% else %} class="nav-item" {% endif %}><a href="{{ c.get_absolute_url }}" class="nav-link">{{c.name|upper}}</a></li>
+            {% endfor %}
+            <li class="nav-item"><a href="#" class="nav-link">ABOUT</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">CONTACT</a></li>
+          </ul>
+        </div>
+        <div class="site_icons">
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class=" dropdown nav-item "><a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">Hi, {{user.customer.first_name|upper|make_list|first}}{{user.customer.last_name|upper|make_list|first}}</a>
+            
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
+              <div class="dropdown-divider"></div>
+              <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+            </div>
+            </li>
+            {% else %}
+            <li class=" dropdown nav-item"><a href="#" class="nav-link btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user">Login</i></a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a href="{% url 'login' %}" class="dropdown-item">Login</a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'register' %}" class="dropdown-item">Register</a>
+              </div>
+            </li>
+           {% endif %}
+            <li style="padding-top:1.8px;" class="nav-item shapeit"><a href="{% url 'cart' %}" class="nav-link"><i class="fas fa-shopping-cart">Cart<span class="badge badge-pill badge-success">{{cartItems}}</span></i></a></li>
+            
+          </ul>
+        </div>
+    </div>
+   </nav>
+    <!--End of Navbar-->
+  <!--Beggining of sale section-->
+  <div class="sale">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 offset-sm-3 text-center">
+          <div class="row">
+      <div class="piece w3-animate-zoom">
+        <div class="col">
+          <h3 class="sales-text"><a href="#">Buy a Minimum of <b>10 Pairs</b> at a Wholesale Price of <b>Ksh. 300</b> per pair! </a></h3>
+        </div>
+      </div>
+      <div class="piece w3-animate-zoom" >
+        <div class="col">
+          <h3 class="sales-text"><a href="#">We Deliver to Nairobi, Mombasa, Kisumu and All the Major Towns in Kenya.</a></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>  
+  <!--end of sale section-->
+    {% block content %}
+    {% endblock content %}
+  <div class="mt-5 container-fluid myfooter">
+    <div class="container">
+    <footer class="px-1 py-4">
+      <div class="row">
+        <div class="px-0 col-xs-6 col-sm-3">
+          <h5>About Us</h5>
+          <hr>
+          <p>We Are Located in Kisumu at Kibuye Market.</p>
+        </div>
+        <div class="px-0 col-xs-6 col-sm-5">
+          <div class="d-flex justify-content-center"><img src="{% static "img/logo.png" %}" class= "footer-logo" alt=""></div>
+          <hr>
+          <p class="px-1">We pride ourselves in making and delivering unique and high quality handmade sandles based
+            on beautiful african designs.
+          </p>
+        </div>
+        <div class="px-0 col-xs-6 col-sm-2">
+          <h5>Navigation</h5>
+          <hr>
+          <ul class="footer_nav">
+            {% for c in categories %}
+                <li class="footer-list"><a href="{{ c.get_absolute_url }}" class="footer_links">{{ c.name.upper}}</a></li>
+                {% endfor %}
+            <li class="footer-list"><a href="#" class="footer_links">CONTACT US</a></li>
+          </ul>
+        </div>
+        <div class="px-0 col-xs-6 col-sm-2">
+          <h5 class="">Follow Us</h5> 
+          <hr>
+          <ul class="social-media">
+          <li class="footer-list"><a href="#"><i class=" social-links fa fa-facebook-official"></i></a></li>
+          <li class="footer-list"><a href="#"><i class="social-links fa fa-twitter"></i></a></li>
+          <li class="footer-list"><a href="#"><i class="social-links fa fa-instagram"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    </div>
+    </div>
+    <!--{% block cart_card %}
+    {% endblock cart_card %} -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="{% static 'js/mainn.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+  <script>
+    var slideIndex = 0;
+    carousel();
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("piece");
+      for (i=0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > x.length) {slideIndex=1}
+      x[slideIndex-1].style.display = "block";
+      setTimeout(carousel, 3000);
+    }
+  </script>
+</body>
+</html>

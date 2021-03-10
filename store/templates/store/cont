@@ -1,0 +1,61 @@
+data-sandle="{{sandle.id}}" data-action="add"
+ const toggleModal = () => {
+      document.querySelector('.modal-1').classList.toggle('hidden');
+    };
+    document.querySelector('#show-modal').addEventListener('click', toggleModal);
+
+    <button data-sandle="{{sandle.id}}" data-action="add" class="btn btn-outline-secondary add-btn text-btn update-cart">Add to Cart</button>
+
+    Please select {{sandle.name|title|truncatewords:3}} size.
+    {% if sandle.category.name.title == "Men"%}
+        {% for men_size in men_sizes %}
+        Size {{men_size.size|title}}
+
+    {% elif sandle.category.name.title == "Ladies"%}
+        {% for ladies_size in ladies_sizes %}
+        {{ladies_size.size|title}}
+
+<!---
+{% block cart_card %}
+<div id = "contshow" class="modal-1 hidden">
+    <div class="modal__contents-1">
+        <div class="close-bar"><span><a id="hide-modal" href="#"><i class="fas fa-times float-right pr-1"></i></a></span></div>
+        <p>Please select product variations</p>
+        {% for size in sizes %}
+            <div class="cart-row_detail">
+                <p>Size {{size.size}}</p><a href="#" class="ml-auto"><i class="fas fa-minus pr-3"></i></a><p class="">0</p><a href="#" class="float-right"><i class="fas fa-plus pl-3"></i></a>
+            </div>
+        {% endfor %}
+        <a class="btn btn-outline-dark text_2_btn mr-2" href="{% url 'store' %}">&#x2190; CONTINUE SHOPPING</a>
+        <a class="btn btn-outline-success text_2_btn ml-2" href="{% url 'cart' %}">VIEW CART AND CHECKOUT &#8594;</a>
+    </div>
+</div>
+{% endblock cart_card %} -->
+
+<div id = "contshow" class="modal-1 hidden">
+            <div class="modal__contents-1">
+                <div class="close-bar"><span><a id="hide-modal" href="#"><i class="fas fa-times float-right pr-1"></i></a></span></div>
+                <p>Please select {{sandle.name|title|truncatewords:3}} size.</p>
+                {% if sandle.category.name.title == "Men"%}
+                {% for men_size in men_sizes %}
+                    <div class="cart-row_detail">
+                        <p>Size {{men_size.size}}</p><a href="#" class="ml-auto"><i class="fas fa-minus pr-3"></i></a><p class="">0</p><a href="#" class="float-right"><i class="fas fa-plus pl-3"></i></a>
+                    </div>
+                {% endfor %}
+                {% elif sandle.category.name.title == "Ladies"%}
+                {% for ladies_size in ladies_sizes %}
+                <div class="cart-row_detail">
+                    <p>Size {{ladies_size.size}}</p><a href="#" class="ml-auto"><i class="fas fa-minus pr-3"></i></a><p class="">0</p><a href="#" class="float-right"><i class="fas fa-plus pl-3"></i></a>
+                </div>
+                {% endfor %}
+                {% elif sandle.category.name.title == "Kids"%}
+                {% for kids_size in kids_sizes %}
+                <div class="cart-row_detail">
+                    <p>Size {{kids_size.size}}</p><a href="#" class="ml-auto"><i class="fas fa-minus pr-3"></i></a><p class="">0</p><a href="#" class="float-right"><i class="fas fa-plus pl-3"></i></a>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <a class="btn btn-outline-dark text_2_btn mr-2" href="{% url 'store' %}">&#x2190; CONTINUE SHOPPING</a>
+                <a class="btn btn-outline-success text_2_btn ml-2" href="{% url 'cart' %}">VIEW CART AND CHECKOUT &#8594;</a>
+            </div>
+        </div>

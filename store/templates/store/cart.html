@@ -1,0 +1,48 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+<div class="pt-5 row">
+<div class="col-lg-12">
+    <div class="box-element">
+        <a class="btn btn-outline-dark text_2_btn " href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+    <br>
+    <br>
+    <table class="table">
+        <tr>
+            <th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+            <th><h5>Total: <strong>Ksh: {{order.get_cart_total|floatformat:2}}</strong></h5></th>
+            <th><a style ="float:right; margin:5px" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a></th>
+        </tr>
+    </table>
+</div>
+<br>
+    <div class="box-element">
+        <div class="cart-row">
+            <div style="flex:1"></div>
+            <div style="flex:1"><strong>Size</strong></div>
+            <div style="flex:2"><strong>Item</strong></div>
+            <div style="flex:1"><strong>Unit Price</strong></div>
+            <div style="flex:1"><strong>Qty</strong></div>
+            <div style="flex:1"><strong>Total</strong></div>
+        </div>
+        {% for item in items %}
+        <div class="cart-row">
+            <div style="flex:1"><a href="{{ item.sandle.get_absolute_url }}"><img class="row-image" src="{% if item.sandle.image %}{{item.sandle.image.url}}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt=""></a></div>
+            <div style="flex:1"><p class="my-auto">{{item.size.size}}</p></div>
+            <div style="flex:2"><p class="my-auto">{{item.sandle.name|title|truncatewords:3}}</p></div>
+            <div style="flex:1"><p class="my-auto">{{item.sandle.price|floatformat:0}}</p></div>
+            <div style="flex:1"><p class="quantity">{{item.quantity}}</p>
+            <div class="quantity">
+                <img data-sandle="{{item.sandle.id}}" data-size="{{item.size.id}}" data-action="add" class="chg-quantity update-cart" src="{% static 'img/arrow-up.png' %}" alt="">
+                <img data-sandle="{{item.sandle.id}}" data-size="{{item.size.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static 'img/arrow-down.png' %}" alt="">
+            </div>
+            </div>
+            <div style="flex:1"><p class="my-auto">Ksh: {{item.get_total}}</p></div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+</div>
+{% endblock content %}

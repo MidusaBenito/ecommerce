@@ -1,0 +1,55 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+<!---->
+<!-- Button trigger modal 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+  </button>-->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Please select product variations</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            {% for size in sizes %}
+            <div class="cart-row_detail">
+                <p>Size {{size.size}}</p><a href="#" data-sandle="{{sandle.id}}" data-size="{{size.id}}" data-action="remove" class="ml-auto update-cart"><i class="fas fa-minus pr-3"></i></a><p class="">0</p><a href="#" data-sandle="{{sandle.id}}" data-size="{{size.id}}" data-action="add" class="float-right update-cart"><i class="fas fa-plus pl-3"></i></a>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-outline-dark text_2_btn mr-auto" href="{% url 'store' %}">&#x2190; CONTINUE SHOPPING</a>
+            <a class="btn btn-outline-success text_2_btn" href="{% url 'cart' %}">VIEW CART AND CHECKOUT &#8594;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!---->
+<div class="container px-3">
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+        <div class="pt-5"><img src="{% if sandle.image %}{{ sandle.image.url }}{% else %}{%static "img/no_image.png" %}{% endif %}" class=" detail_thumbnail">
+        </div>
+    </div>
+    <div class="col-md-5 pt-4">
+        <h3 style="font-weight: 600;">{{sandle.name|title}}</h3>
+        <h4 style="font-weight: 600;">Category&#58; <a href="{{ sandle.category.get_absolute_url }}">{{sandle.category.name.title}}</a></h4>
+        <h5 style="font-weight: 600;">Price&#58; {{sandle.price}}</h5>
+        <button type="button" class="btn btn-outline-secondary add-btn text-btn" data-toggle="modal" data-target="#exampleModalCenter">Add to Cart</button>
+        <!--<a id="show-modal" class="btn btn-outline-dark text_2_btn mr-2" href="#">Add to Cart</a>-->
+        <hr style="background-color: black; height:.7px;">
+        <h5 style="font-weight: 600;">Product Description&#58;</h5>
+        <p class="descp">{{sandle.description}}</p>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+
+{% if not category %} 
+<div class="offer">  
+<div class="container">         
+<div class="hero-slide">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 px-4 py-4">
+                    <div class="w3-animate-left">
+                      <img src="{{ men.0.image.url }}" alt="" class="offer-img">
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 cuscol-2 px-4 my-auto">
+              <div class="w3-animate-right">
+              <div class="row">
+                  <div class="col-12">
+                      <p class="sale-para">Exclusively Available on Leisure Footwear</p>
+                      <h1 class="resize">{{ men.0.name.title }}</h1>
+                      <small>The {{ men.0.name.title }} is perfectly made for your feet. It is very durable and 
+                              has a very beautiful design. Try it out today and you will love it.
+                      </small>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                      <a href="{{ men.0.category.get_absolute_url }}" class="home-btn">Shop Collection &#8594;</a>
+                  </div>
+              </div>
+              </div>
+          </div>
+          </div>
+          </div>
+          <!--another one-->
+        <div class="hero-slide">
+          <div class="row">
+            <div class="col-xs-12 col-md-6 px-4 py-4">
+                <div class="w3-animate-left">
+                <img src="{{ ladies.0.image.url }}" alt="" class="offer-img">
+                </div>
+            </div>
+          <div class="col-xs-12 col-md-6 cuscol-2 px-4 my-auto">
+              <div class="w3-animate-right">
+              <div class="row">
+                  <div class="col-12">
+                      <p class="sale-para">Exclusively Available on Leisure Footwear</p>
+                      <h1 class="resize">{{ ladies.0.name.title }}</h1>
+                      <small>The {{ ladies.0.name.title }} is perfectly made for your feet. It is very durable and 
+                              has a very beautiful design. Try it out today and you will love it.
+                      </small>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                      <a href="{{ ladies.0.category.get_absolute_url }}" class="home-btn">Shop Collection &#8594;</a>
+                  </div>
+              </div>
+              </div>
+          </div>
+         
+          </div>
+          </div>
+      <!--end-->
+      <!--another-->
+      <div class="hero-slide">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 px-4 py-4">
+                <div class="w3-animate-left">
+                <img src="{{ children.0.image.url }}" alt="" class="offer-img">
+                </div>
+            </div>
+        <div class="col-xs-12 col-md-6 cuscol-2 px-4 my-auto">
+            <div class="w3-animate-right">
+            <div class="row">
+                <div class="col-12">
+                    <p class="sale-para">Exclusively Available on Leisure Footwear</p>
+                    <h1 class="resize">{{ children.0.name.title }}</h1>
+                    <small>The {{ children.0.name.title }} is perfectly made for your feet. It is very durable and 
+                            has a very beautiful design. Try it out today and you will love it.
+                    </small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{ children.0.category.get_absolute_url }}" class="home-btn">Shop Collection &#8594;</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    <!--end-->
+    </div>
+</div>
+{% endif %}
+<div class="container">
+<div class="pt-4 row">
+    {% for sandle in sandles %}
+    <div class="pt-3 col-xs-6 col-sm-6 col-md-4 col-lg-3">
+        <a href="{{ sandle.get_absolute_url }}"><img class="thumbnail" src="{% if sandle.image %}{{sandle.image.url}}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt=""></a>
+        <div class="box-element product">
+            <a href="{{ sandle.get_absolute_url }}"><h6><strong>{{sandle.name|title|truncatewords:3}}</strong></h6></a>
+            <h6 style="font-size:.7rem">{{ sandle.category.name.title }}</h6>
+            <hr>
+            <!--<button data-sandle="{{sandle.id}}" data-action="add" class="btn btn-outline-secondary add-btn text-btn update-cart">Add to Cart</button>-->
+            <button type="button" class="btn btn-outline-secondary add-btn text-btn" data-toggle="modal" data-target="#exampleModalCenter{{sandle.id}}">Add to Cart</button>
+            <a href="{{ sandle.get_absolute_url }}" class="btn btn-outline-success text-btn ">view</a>
+            <h4 style="display: inline-block; float: right; font-size:.7rem">{{sandle.price}}</h4>
+        </div>
+    </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter{{sandle.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Please select {{sandle.name|title|truncatewords:3}} size</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <!--{% for sandle_size in sandle_sizes %}
+            <div class="cart-row_detail">
+                <p>Size {{sandle_size.size}}</p><a href="#" class="ml-auto"><i class="fas fa-minus pr-3"></i></a><p class="">0</p><a href="#" class="float-right"><i class="fas fa-plus pl-3"></i></a>
+            </div>
+        {% endfor %}-->
+                {% if sandle.category.name.title == "Men"%}
+                {% for men_size in men_sizes %}
+                    <div class="cart-row_detail">
+                        <p>Size {{men_size.size}}</p><a href="#" data-sandle="{{sandle.id}}" data-size="{{men_size.id}}" data-action="remove" class="ml-auto update-cart"><i class="fas fa-minus pr-3"></i></a><p class="">0</p><a href="#" data-sandle="{{sandle.id}}" data-size="{{men_size.id}}" data-action="add" class="float-right update-cart"><i class="fas fa-plus pl-3"></i></a>
+                    </div>
+                {% endfor %}
+                {% elif sandle.category.name.title == "Ladies"%}
+                {% for ladies_size in ladies_sizes %}
+                <div class="cart-row_detail">
+                    <p>Size {{ladies_size.size}}</p><a href="#" data-sandle="{{sandle.id}}" data-size="{{ladies_size.id}}" data-action="remove" class="ml-auto update-cart"><i class="fas fa-minus pr-3"></i></a><p class="">0</p><a href="#" data-sandle="{{sandle.id}}" data-size="{{ladies_size.id}}" data-action="add" class="float-right update-cart"><i class="fas fa-plus pl-3"></i></a>
+                </div>
+                {% endfor %}
+                {% elif sandle.category.name.title == "Kids"%}
+                {% for kids_size in kids_sizes %}
+                <div class="cart-row_detail">
+                    <p>Size {{kids_size.size}}</p><a href="#" data-sandle="{{sandle.id}}" data-size="{{kids_size.id}}" data-action="remove" class="ml-auto update-cart"><i class="fas fa-minus pr-3"></i></a><p class="">0</p><a href="#" data-sandle="{{sandle.id}}" data-size="{{kids_size.id}}" data-action="add" class="float-right update-cart"><i class="fas fa-plus pl-3"></i></a>
+                </div>
+                {% endfor %}
+                {% endif %}
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-outline-dark text_2_btn mr-auto" href="{% url 'store' %}">&#x2190; CONTINUE SHOPPING</a>
+            <a class="btn btn-outline-success text_2_btn" href="{% url 'cart' %}">VIEW CART AND CHECKOUT &#8594;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!---->
+    {% endfor %}
+</div>
+</div>
+{% endblock content %}

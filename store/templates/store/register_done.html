@@ -1,0 +1,12 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}<title>Welcome</title>{% endblock %}
+{% block content%}
+<div class="container d-flex justify-content-center text-center pt-5">
+    <div class="box-element ">
+        <div class="cart-row1 px-4">
+        <p style="font-weight:550;">Your account has been successfully created. Now you can <a href="{% url "login" %}" style="text-decoration: none;">log in</a>.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

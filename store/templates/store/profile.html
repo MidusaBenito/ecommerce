@@ -1,0 +1,33 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}<title>Welcome</title>{% endblock %}
+{% block content%}
+<div class="container d-flex justify-content-center text-center pt-5">
+    <div class="box-element ">
+        <div class="cart-row1 px-4">
+            <h3 style="font-weight:600;">Edit Your Profile</h3>
+        <p style="font-weight:550;color:red;">{{ form.non_field_errors }}</p>
+        <p style="font-weight:550;">Fill the form below to complete your registration:</p>
+        <form method='post'class="pb-3">
+            {% csrf_token %}
+            <div class="form-group row">
+                {{ customer_form.first_name.errors }}
+                <label for="{{ customer_form.first_name.id_for_label }}" class="col-sm-4 col-form-label">First Name:</label>
+                <div class="col-sm-8">{{ customer_form.first_name }}</div>
+            </div>
+            <div class="form-group row">
+                {{ customer_form.last_name.errors }}
+                <label for="{{ customer_form.last_name.id_for_label }}" class="col-sm-4 col-form-label">Last Name:</label>
+                <div class="col-sm-8">{{ customer_form.last_name }}</div>
+            </div>
+            <div class="form-group row">
+                {{ customer_form.phone.errors }}
+                <label for="{{ customer_form.phone.id_for_label }}" class="col-sm-4 col-form-label">Phone:</label>
+                <div class="col-sm-8">{{ customer_form.phone }}</div>
+            </div>
+            <input class="btn btn-success" type="submit" value="Save">
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
