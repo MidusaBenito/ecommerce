@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 ADMINS = (
     ('MidusaTech', 'scarlettbenz101@gmail.com'),
 )
-ALLOWED_HOSTS = ['https://leisurefootwear.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['https://leisurefootwear.herokuapp.com/', '127.0.0.1', '0.0.0.0:5000/']
 
 DATABASES = {
     'default': {
