@@ -35,6 +35,9 @@ a:hover{
   align-items:center;
   z-index:100;
 }
+.hero-slide{
+  display:none;
+}
 .modal__contents-1{
   box-shadow:hsl(0, 0%, 80%) 0 0 16px;
 	background-color: #fff;
@@ -187,6 +190,7 @@ color: white !important;
 .sales-text{
     text-transform: uppercase;
     text-align: center;
+    display:none;
     
 }
 .sales-text{
