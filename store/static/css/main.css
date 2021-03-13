@@ -190,7 +190,6 @@ color: white !important;
 .sales-text{
     text-transform: uppercase;
     text-align: center;
-    display:none;
     
 }
 .sales-text{
@@ -247,6 +246,9 @@ z-index: 10;
 }
 .prod-img{
   max-height: 150px;
+}
+.piece{
+  display:none;
 }
 
 .overlay{
