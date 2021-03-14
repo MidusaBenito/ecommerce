@@ -52,8 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'phone_field',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -159,9 +161,16 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ##import dj_databse_url 
 #prod_db = dj_database_url.config(conn_max_age=500)
 #DATABASES['default'].update(prod_db)
 django_on_heroku.settings(locals())
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hkjyoejo3',
+    'API_KEY': '923833873963957',
+    'API_SECRET': 'pwofwjas4KfbBdKTL0j4GKPAlvU',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
