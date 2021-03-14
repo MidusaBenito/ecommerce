@@ -11,8 +11,8 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def store(request, category_slug=None):
     category=None
-    data = cartData(request)
-    cartItems = data['cartItems']
+    #data = cartData(request)
+    #cartItems = data['cartItems']
     
     sandles = get_sandles(request)
     #sandle_sizes = sizes(request)
@@ -27,40 +27,40 @@ def store(request, category_slug=None):
         sandles = sandles.filter(category=category)
         #sandle_sizes = sandle_sizes.filter(category=category)
         #print(sandle_sizes)
-    context = {"category": category,'sandles':sandles,'cartItems': cartItems,"men":men, "ladies":ladies, "children":children, "men_sizes":men_sizes, "ladies_sizes":ladies_sizes, "kids_sizes":kids_sizes}
+    context = {"category": category,'sandles':sandles, "men":men, "ladies":ladies, "children":children, "men_sizes":men_sizes, "ladies_sizes":ladies_sizes, "kids_sizes":kids_sizes}
     return render(request, 'store/store.html', context) 
 
 #def sandle_sizes(request):
 
 def sandle_detail(request, id, slug):
-    data = cartData(request)
+    #data = cartData(request)
     #men_sizes=Category.objects.get(id=1).sizes.all()
     #ladies_sizes=Category.objects.get(id=2).sizes.all()
     #kids_sizes=Category.objects.get(id=3).sizes.all()
-    cartItems = data['cartItems']
+    #cartItems = data['cartItems']
     sandle = get_object_or_404(Sandle, id=id, slug=slug)
     cat = (sandle.category)
     sizes = Category.objects.get(name=cat).sizes.order_by('-id')
     due_date = datetime.now() + timedelta(days=7)
     due_date_2 = datetime.now() + timedelta(days=10)
-    context_bound = {'cartItems':cartItems,"sandle":sandle,"due_date":due_date, "due_date_2":due_date_2, "cat": cat, "sizes": sizes}
+    context_bound = {"sandle":sandle,"due_date":due_date, "due_date_2":due_date_2, "cat": cat, "sizes": sizes}
     return render(request, 
                     'store/detail.html', context_bound)
 
 def cart(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
+    #data = cartData(request)
+    #cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-    context = {'items':items, 'order':order, 'cartItems':cartItems}
+    context = {'items':items, 'order':order}
     return render(request, 'store/cart.html', context) 
 
 def checkout(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
+    #data = cartData(request)
+    #cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-    context = {'items':items, 'order':order, 'cartItems':cartItems}
+    context = {'items':items, 'order':order}
     return render(request, 'store/checkout.html', context) 
 
 def updateItems(request):

@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'fyz4gk#o36wg^k(9zv)--6*%pwa8(8kasy!gkppezg-rb4hb=8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True 
+DEBUG = False 
 
 #ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -83,6 +83,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'store.context_processors.categories_processor',
+                'store.context_processors.cart_items',
             ],
         },
     },

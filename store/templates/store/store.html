@@ -100,13 +100,13 @@
     <div class="pt-3 col-xs-6 col-sm-6 col-md-4 col-lg-3">
         <a href="{{ sandle.get_absolute_url }}"><img class="thumbnail" src="{% if sandle.image %}{{sandle.image.url}}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt=""></a>
         <div class="box-element product">
-            <a href="{{ sandle.get_absolute_url }}"><h6><strong>{{sandle.name|title|truncatewords:3}}</strong></h6></a>
+            <a href="{{ sandle.get_absolute_url }}"><h6><strong>{{sandle.name|title|truncatewords:4}}</strong></h6></a>
             <h6 style="font-size:.7rem">{{ sandle.category.name.title }}</h6>
             <hr>
             <!--<button data-sandle="{{sandle.id}}" data-action="add" class="btn btn-outline-secondary add-btn text-btn update-cart">Add to Cart</button>-->
             <button type="button" class="btn btn-outline-secondary add-btn text-btn" data-toggle="modal" data-target="#exampleModalCenter{{sandle.id}}">Add to Cart</button>
             <a href="{{ sandle.get_absolute_url }}" class="btn btn-outline-success text-btn ">view</a>
-            <h4 style="display: inline-block; float: right; font-size:.7rem">{{sandle.price}}</h4>
+            <h4 class="price-tag" style="display: inline-block; float: right; color:#28a745; font-weight:600;">KSh&#58; {{sandle.price}}</h4>
         </div>
     </div>
     <!-- Modal -->

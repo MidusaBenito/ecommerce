@@ -68,7 +68,7 @@
       <div class="site_mob ml-auto">
         <ul class="navbar-nav">
           {% if user.is_authenticated %}
-            <li class="nav-item dropdown"><a href="#" class="nav-link btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi, {{user.customer.first_name|upper|make_list|first}}{{user.customer.last_name|upper|make_list|first}}</a>
+            <li class="dropdown nav-item"><a href="#" class="nav-link mobunique dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi, {{user.customer.first_name|upper|make_list|first}}{{user.customer.last_name|upper|make_list|first}}</a>
             
             <div style="position:absolute;" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
@@ -77,7 +77,7 @@
             </div>
             </li>
            {% else %}
-            <li class="nav-item dropdown"><a href="#" class="nav-link btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user">Login</i></a>
+            <li class=" dropdown nav-item "><a href="#" class="nav-link mobunique dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user">Login</i></a>
               <div style="position:absolute;" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a href="{% url 'login' %}" class="dropdown-item">Login</a>
                 <div class="dropdown-divider"></div>
@@ -85,7 +85,7 @@
               </div>
             </li>
             {% endif %}
-          <li style="padding-top:2.1px;" class="nav-item"><a href="{% url 'cart' %}" class="nav-link"><i class="fas fa-shopping-cart">Cart<span class="badge badge-pill badge-success">{{cartItems}}</span></i></a></li>
+          <li style="padding-top:2.1px;" class="nav-item"><a href="{% url 'cart' %}" class="nav-link mobunique"><i class="fas fa-shopping-cart">Cart<span class="badge badge-pill">{{cartItems}}</span></i></a></li>
         </ul>
       </div>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -95,18 +95,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto">
-            <li><a href="{% url 'store' %}" class="nav-link">HOME</a></li>
+            <li><a href="{% url 'store' %}" class="nav-link nahover" id="switched">HOME</a></li>
             {% for c in categories %}
-            <li {% if category.slug == c.slug %} class="#nav-item selected" {% else %} class="nav-item" {% endif %}><a href="{{ c.get_absolute_url }}" class="nav-link">{{c.name|upper}}</a></li>
+            <li {% if category.slug == c.slug %} class="#nav-item selected" {% else %} class="nav-item" {% endif %}><a href="{{ c.get_absolute_url }}" class="nav-link nahover">{{c.name|upper}}</a></li>
             {% endfor %}
-            <li class="nav-item"><a href="#" class="nav-link">ABOUT</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">CONTACT</a></li>
+            <li class="nav-item"><a href="#" class="nav-link nahover" id="switched">ABOUT</a></li>
+            <li class="nav-item"><a href="#" class="nav-link nahover" id="switched">CONTACT</a></li>
           </ul>
         </div>
         <div class="site_icons">
           <ul class="navbar-nav">
             {% if user.is_authenticated %}
-            <li class=" dropdown nav-item "><a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">Hi, {{user.customer.first_name|upper|make_list|first}}{{user.customer.last_name|upper|make_list|first}}</a>
+            <li class=" dropdown nav-item "><a href="#" class="nav-link unique dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">Hi, {{user.customer.first_name|upper|make_list|first}}{{user.customer.last_name|upper|make_list|first}}</a>
             
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
@@ -115,7 +115,7 @@
             </div>
             </li>
             {% else %}
-            <li class=" dropdown nav-item"><a href="#" class="nav-link btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user">Login</i></a>
+            <li class=" dropdown nav-item"><a href="#" class="nav-link unique dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user">Login</i></a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a href="{% url 'login' %}" class="dropdown-item">Login</a>
                 <div class="dropdown-divider"></div>
@@ -123,7 +123,7 @@
               </div>
             </li>
            {% endif %}
-            <li style="padding-top:1.8px;" class="nav-item shapeit"><a href="{% url 'cart' %}" class="nav-link"><i class="fas fa-shopping-cart">Cart<span class="badge badge-pill badge-success">{{cartItems}}</span></i></a></li>
+            <li style="padding-top:1.8px;" class="nav-item shapeit"><a href="{% url 'cart' %}" class="nav-link unique"><i class="fas fa-shopping-cart">Cart<span class="badge badge-pill">{{cartItems}}</span></i></a></li>
             
           </ul>
         </div>
@@ -138,12 +138,12 @@
           <div class="row">
       <div class="piece w3-animate-zoom">
         <div class="col">
-          <h3 class="sales-text"><a href="#">Buy a Minimum of <b>10 Pairs</b> at a Wholesale Price of <b>Ksh. 300</b> per pair! </a></h3>
+          <h3 class="sales-text"><a href="#" id="justwords" >Buy a Minimum of <b>10 Pairs</b> at a Wholesale Price of <b>Ksh. 300</b> per pair! </a></h3>
         </div>
       </div>
       <div class="piece w3-animate-zoom">
         <div class="col">
-          <h3 class="sales-text"><a href="#">We Deliver to Nairobi, Mombasa, Kisumu and All the Major Towns in Kenya.</a></h3>
+          <h3 class="sales-text"><a href="#" id="justwords2" >We Deliver to Nairobi, Mombasa, Kisumu and All the Major Towns in Kenya.</a></h3>
         </div>
       </div>
     </div>
@@ -184,9 +184,9 @@
           <h5 class="">Follow Us</h5> 
           <hr>
           <ul class="social-media">
-          <li class="footer-list"><a href="#"><i class=" social-links fa fa-facebook-official"></i></a></li>
+          <li class="footer-list"><a href="https://www.facebook.com/leisurefootwear-224323199003034"><i class=" social-links fa fa-facebook-official"></i></a></li>
           <li class="footer-list"><a href="#"><i class="social-links fa fa-twitter"></i></a></li>
-          <li class="footer-list"><a href="#"><i class="social-links fa fa-instagram"></i></a></li>
+          <li class="footer-list"><a href="https://www.instagram.com/p/CLcBwRIjMJp/?igshid=4tyfskz4b6fm"><i class="social-links fa fa-instagram"></i></a></li>
           </ul>
         </div>
       </div>

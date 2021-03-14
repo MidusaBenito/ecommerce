@@ -14,6 +14,22 @@ $(document).ready(function() {
     }
     }
 
+    function showEditForm(){
+      $('#prof-edit').on('click', function(e){
+        e.preventDefault();
+      });
+    }
+    function preventIt(){
+      $('#justwords').on('click', function(e){
+        e.preventDefault();
+      });
+    }
+    function preventIt2(){
+      $('#justwords2').on('click', function(e){
+        e.preventDefault();
+      });
+    }
+
     /*function modalShow(){
         $('#contshow').removeClass('hidden');
     }
@@ -21,6 +37,9 @@ $(document).ready(function() {
         $('#contshow').addClass('hidden');
     } */
       heroCarousel();
+      showEditForm();
+      preventIt();
+      preventIt2();
 
     /*  
       $('#show-modal').on('click', function(e){

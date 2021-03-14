@@ -171,10 +171,22 @@ body {
 .site_mob{
     display: none;
 }
-.navbar .nav-link:hover{
+.navbar .nahover:hover{
 background-color:rgb(136, 200, 188);
 font-weight: bold;
 }
+.unique:hover{
+  color:#f68b1e !important;
+  font-weight: bold;
+  }
+ .site_mob .mobunique:hover{
+    color:#f68b1e !important;
+    font-weight: bold;
+    }
+  .badge{
+    background-color: #f68b1e;
+    color:white;
+  }
 .navbar .selected{
   background-color:rgb(136, 200, 188);
 font-weight: bold;
@@ -409,6 +421,22 @@ footer h5{
 }
 .subproduct-grid:hover{
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media screen and (min-width:1094px){
+  .price-tag{
+    font-size:1.1rem;
+  }
+}
+@media screen and (max-width:990px){
+  .price-tag{
+    font-size:.8rem;
+  }
+}
+@media screen and (max-width:1094px) and (min-width:990px){
+  .price-tag{
+    font-size:.65rem;
+  }
 }
 @media screen and (max-width:992px) and (min-width:768px){
   .subbtn{
