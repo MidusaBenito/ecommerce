@@ -6,9 +6,9 @@ for (i = 0; i < updateBtns.length; i++) {
 		var sizeId = this.dataset.size
 		var action = this.dataset.action
 		var sandleDetails = [sandleId, sizeId]
-		console.log('sandleId:', sandleId, 'Action:', action)
-		console.log('USER:', user)
-		console.log('SandleDetails:', sandleDetails)
+		//console.log('sandleId:', sandleId, 'Action:', action)
+		//console.log('USER:', user)
+		//console.log('SandleDetails:', sandleDetails)
 
 		if (user == 'AnonymousUser'){
 			addCookieItem(sandleDetails, action)
@@ -19,7 +19,7 @@ for (i = 0; i < updateBtns.length; i++) {
 }
 
 function updateUserOrder(sandleId, sizeId, action){
-	console.log('User is authenticated, sending data...')
+	//console.log('User is authenticated, sending data...')
 
 		var url = '/update_item/'
 
@@ -40,7 +40,7 @@ function updateUserOrder(sandleId, sizeId, action){
 }
 
 function addCookieItem(sandleDetails, action){
-	console.log('User is not authenticated')
+	//console.log('User is not authenticated')
 
 	if (action == 'add'){
 		if (cart[sandleDetails] == undefined){
@@ -59,7 +59,7 @@ function addCookieItem(sandleDetails, action){
 			delete cart[sandleDetails];
 		}
     }
-    console.log('Cart:', cart)
+    //console.log('Cart:', cart)
 	document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 	
 	location.reload()
