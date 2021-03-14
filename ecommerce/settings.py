@@ -46,6 +46,7 @@ DATABASES = {
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'store.apps.StoreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -160,9 +161,10 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'store.authentication.EmailAuthBackend',
 ]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#PROJECT_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_DIRS = os.path.join(BASE_DIR, 'staticfiles/')
 ##import dj_databse_url 
 #prod_db = dj_database_url.config(conn_max_age=500)
 #DATABASES['default'].update(prod_db)
@@ -174,4 +176,5 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'pwofwjas4KfbBdKTL0j4GKPAlvU',
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+WHITENOISE_MANIFEST_STRICT = False
 
