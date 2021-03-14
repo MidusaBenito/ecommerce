@@ -48,7 +48,7 @@ def sandle_detail(request, id, slug):
                     'store/detail.html', context_bound)
 
 def cart(request):
-    #data = cartData(request)
+    data = cartData(request)
     #cartItems = data['cartItems']
     order = data['order']
     items = data['items']
@@ -56,7 +56,7 @@ def cart(request):
     return render(request, 'store/cart.html', context) 
 
 def checkout(request):
-    #data = cartData(request)
+    data = cartData(request)
     #cartItems = data['cartItems']
     order = data['order']
     items = data['items']
