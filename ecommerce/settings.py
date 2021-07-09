@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phone_field',
     'cloudinary',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [

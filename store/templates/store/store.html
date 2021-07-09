@@ -98,7 +98,7 @@
 <div class="pt-4 row">
     {% for sandle in sandles %}
     <div class="pt-3 col-xs-6 col-sm-6 col-md-4 col-lg-3">
-        <a href="{{ sandle.get_absolute_url }}"><img class="thumbnail" src="{% if sandle.image %}{{sandle.image.url}}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt=""></a>
+        {% load thumbnail %}<a href="{{ sandle.get_absolute_url }}"><img class="thumbnail" src="{% if sandle.image %}{% thumbnail sandle.image 300x0 %}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt=""></a>
         <div class="box-element product">
             <a href="{{ sandle.get_absolute_url }}"><h6><strong>{{sandle.name|title|truncatewords:4}}</strong></h6></a>
             <h6 style="font-size:.7rem">{{ sandle.category.name.title }}</h6>
